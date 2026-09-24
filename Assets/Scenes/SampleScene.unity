@@ -321,7 +321,7 @@ Transform:
   m_GameObject: {fileID: 57302313}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.2438, y: -6.199, z: 0}
+  m_LocalPosition: {x: -8.12, y: -5.84, z: 0}
   m_LocalScale: {x: 1.8924, y: 1.791, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -340,6 +340,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::cambioMundo
   playerInput: {fileID: 0}
+  activarTransicion: 0
+  pixelesLevitacion: 8
 --- !u!1 &449580090
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +522,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.153913, y: -6.199, z: -10}
+  m_LocalPosition: {x: -3.714262, y: -5.84, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1038,7 +1040,7 @@ Transform:
   m_GameObject: {fileID: 2024469700}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.153913, y: -6.199, z: -10}
+  m_LocalPosition: {x: -3.714262, y: -5.84, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

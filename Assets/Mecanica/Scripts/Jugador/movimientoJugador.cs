@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,12 +28,31 @@ public class movimientoJugador : MonoBehaviour
     {
         MoverJugador();
         Saltar();
+
+        
     }
 
     private void MoverJugador()
     {
         direccionMovimiento = playerInput.actions["Movimiento"].ReadValue<Vector2>()*velocidadMovimiento;
         jugadorRB.linearVelocity = new Vector2(direccionMovimiento.x, jugadorRB.linearVelocity.y);
+
+        if (direccionMovimiento.x < 0)
+        {
+            transform.localScale = new Vector3(
+                -Mathf.Abs(transform.localScale.x),
+                transform.localScale.y,
+                transform.localScale.z
+            );
+        }
+        else if (direccionMovimiento.x > 0)
+        {
+            transform.localScale = new Vector3(
+                Mathf.Abs(transform.localScale.x),
+                transform.localScale.y,
+                transform.localScale.z
+            );
+        }
     }
 
     private void Saltar()

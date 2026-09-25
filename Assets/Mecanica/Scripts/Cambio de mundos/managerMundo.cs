@@ -14,6 +14,15 @@ public class managerMundo : MonoBehaviour
     [Header("Jugador")]
     [SerializeField] private Transform jugador;
 
+    [Header("Puntos de Cambio")]
+    [SerializeField] private Transform puntoLuzIzquierda;
+    [SerializeField] private Transform puntoLuzDerecha;
+    [SerializeField] private Transform puntoOscuridadIzquierda;
+    [SerializeField] private Transform puntoOscuridadDerecha;
+    [SerializeField] private Transform puntoElegido;
+
+
+
     private void Awake()
     {
         instance = this;
@@ -21,19 +30,46 @@ public class managerMundo : MonoBehaviour
 
     public void CambioDeMundo()
     {
-        Vector3 nuevaPosicion = jugador.position;
-
         if (enMundoDeLuz)
         {
-            nuevaPosicion.y = yOscuridad;
+            float distanciaIzquierda = Mathf.Abs(
+                jugador.position.x - puntoLuzIzquierda.position.x
+            );
+
+            float distanciaDerecha = Mathf.Abs(
+                jugador.position.x - puntoLuzDerecha.position.x
+            );
+
+            if (distanciaIzquierda < distanciaDerecha)
+            {
+                jugador.position = puntoOscuridadIzquierda.position;
+            }
+            else
+            {
+                jugador.position = puntoOscuridadDerecha.position;
+            }
         }
         else
         {
-            nuevaPosicion.y = yLuz;
-        }
+            float distanciaIzquierda = Mathf.Abs(
+                jugador.position.x - puntoOscuridadIzquierda.position.x
+            );
 
-        jugador.position = nuevaPosicion;
+            float distanciaDerecha = Mathf.Abs(
+                jugador.position.x - puntoOscuridadDerecha.position.x
+            );
+
+            if (distanciaIzquierda < distanciaDerecha)
+            {
+                jugador.position = puntoLuzIzquierda.position;
+            }
+            else
+            {
+                jugador.position = puntoLuzDerecha.position;
+            }
+        }
 
         enMundoDeLuz = !enMundoDeLuz;
     }
 }
+

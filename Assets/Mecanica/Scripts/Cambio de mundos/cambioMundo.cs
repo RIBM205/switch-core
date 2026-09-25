@@ -41,34 +41,61 @@ public class cambioMundo : MonoBehaviour
     private IEnumerator TransicionDeMundo()
     {
         enTransicion = true;
+
         bool movimientoHabilitado = movimiento.enabled;
         bool fisicaHabilitada = jugadorRB.simulated;
+
         movimiento.enabled = false;
         jugadorRB.linearVelocity = Vector2.zero;
         jugadorRB.angularVelocity = 0f;
         jugadorRB.simulated = false;
 
-        Vector3 inicio = transform.position;
         SpriteRenderer sprite = GetComponentInChildren<SpriteRenderer>();
+
+        Vector3 escalaOriginal = sprite.transform.localScale;
+
+        Vector3 inicio = transform.position;
+
         float unidadesPorPixel = sprite != null && sprite.sprite != null
             ? Mathf.Abs(sprite.transform.lossyScale.y) / sprite.sprite.pixelsPerUnit
             : 0.01f;
+
         Vector3 destino = inicio + Vector3.up * (pixelesLevitacion * unidadesPorPixel);
 
         const float duracion = 2f;
         float tiempo = 0f;
+
         while (tiempo < duracion)
         {
             tiempo += Time.deltaTime;
-            transform.position = Vector3.Lerp(inicio, destino,
-                Mathf.SmoothStep(0f, 1f, tiempo / duracion));
+
+            float progreso = tiempo / duracion;
+
+            transform.position = Vector3.Lerp(
+                inicio,
+                destino,
+                Mathf.SmoothStep(0f, 1f, progreso)
+            );
+
+            
+            if (sprite != null)
+            {
+                float pulso = 1f + Mathf.Sin(tiempo * 8f) * 1f;
+                sprite.transform.localScale = escalaOriginal * pulso;
+            }
+
             yield return null;
         }
 
+        if (sprite != null)
+            sprite.transform.localScale = escalaOriginal;
+
         managerMundo.instance.CambioDeMundo();
+
         jugadorRB.position = transform.position;
         jugadorRB.simulated = fisicaHabilitada;
         movimiento.enabled = movimientoHabilitado;
+
         activarTransicion = false;
         enTransicion = false;
     }

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Suelo
+  - Pintura
+  - Muerte
   layers:
   - Default
   - TransparentFX
